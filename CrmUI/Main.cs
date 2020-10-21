@@ -1,5 +1,6 @@
 ﻿using CrmBL.Model;
 using System;
+using System.Linq;
 using System.Windows.Forms;
 
 namespace CrmUI
@@ -7,11 +8,22 @@ namespace CrmUI
     public partial class Main : Form
     {
         CrmContext db;
+        Player player;
+        Dungeon dung;
+        Character character;
+        Bosses bosses;
 
         public Main()
         {
             InitializeComponent();
             db = new CrmContext();
+
+            dung = new Dungeon(character);
+            bosses = new Bosses(Name, db.Players.FirstOrDefault())
+            {
+                KillBoss = false
+            };
+
         }
 
         private void Main_Load(object sender, EventArgs e)
@@ -76,6 +88,28 @@ namespace CrmUI
         private void itemsToolStripMenuItem_Click(object sender, EventArgs e)
         {
 
+        }
+
+        private void linkLabel1_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            var form = new Login();
+            form.ShowDialog();
+            if(form.DialogResult == DialogResult.OK)
+            {
+                var tempPlayer = db.Players.FirstOrDefault(p => p.Name.Equals(form.Player.Name));
+                if(tempPlayer != null)
+                {
+                    player = tempPlayer; 
+                }
+                else
+                {
+                    db.Players.Add(form.Player);
+                    db.SaveChanges();
+                    player = form.Player;
+                }
+            }
+
+            linkLabel1.Text = $"Здравствуйте, {player.Name}";
         }
     }
 }

@@ -33,8 +33,8 @@ namespace CrmUI
 
         private void button1_Click(object sender, EventArgs e)
         {
-            var c = Character ?? new Character();
-            c.Name = textBox1.Text;
+            Character = Character ?? new Character();
+            Character.Name = textBox1.Text;
             Close();
         }
     }

@@ -34,10 +34,10 @@ namespace CrmUI
 
         private void button1_Click(object sender, EventArgs e)
         {
-            var p = Item ?? new Item();
-            p.Name = textBox1.Text;
-            p.DropChance = numericUpDown1.Value;
-            p.Count = Convert.ToInt32(numericUpDown2.Value);
+            Item = Item ?? new Item();
+            Item.Name = textBox1.Text;
+            Item.DropChance = numericUpDown1.Value;
+            Item.Count = Convert.ToInt32(numericUpDown2.Value);
             Close();
         }
 

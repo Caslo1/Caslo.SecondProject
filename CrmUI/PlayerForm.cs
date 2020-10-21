@@ -32,8 +32,8 @@ namespace CrmUI
 
         private void button1_Click(object sender, EventArgs e)
         {
-            var p = Player ?? new Player();
-            p.Name = textBox1.Text;
+            Player = Player ?? new Player();
+            Player.Name = textBox1.Text;
             Close();
         }
     }

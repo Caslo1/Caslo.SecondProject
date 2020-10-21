@@ -1,5 +1,5 @@
-﻿using System.Collections.Generic;
-using System.Net;
+﻿using System;
+using System.Collections.Generic;
 
 namespace CrmBL.Model
 {
@@ -11,6 +11,8 @@ namespace CrmBL.Model
         public Queue<Dungeon> Queue { get; set; }
         public bool KillBoss { get; set; }
         public int Count => Queue.Count;
+
+        public event EventHandler<Loot> OpenChest;
 
         public Bosses(string name, Player player)
         {
@@ -55,7 +57,11 @@ namespace CrmBL.Model
             {
                 db.SaveChanges();
             }
+        }
 
+        public override string ToString()
+        {
+            return $"Boss: {Name}";
         }
     }
 }
